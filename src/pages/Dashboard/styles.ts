@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import {shade} from 'polished';
 
 interface FormProps {
@@ -14,7 +14,7 @@ export const Title = styled.h1`
     margin-top: 80px;
 `;
 
-export const Form = styled.form`
+export const Form = styled.form<FormProps>`
     margin-top: 65px;
     max-width: 700px;
 
@@ -28,20 +28,18 @@ export const Form = styled.form`
         border-radius: 5px 0px 0px 5px;
         color: 3a3a3a;
         border: 2px solid #fff;
+        border-right: 0;
 
-        &:hover {
-            background: ${shade(0.2, '#f0f0f5')};
-        }
-
-        &:active {
-            background: #a3a3a3 ;
-        }
+        //se tiver erro, eu quero por a borda vermelha
+        ${(props) => props.hasError && css`
+            border-color: #c53030;
+        `}
 
         &::placeholder {
             color: #a3a3a3;
         }
 
-        &.has-error{
+        &.error{
             border: 2px solid green;
         }
     }
