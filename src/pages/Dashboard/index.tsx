@@ -1,11 +1,11 @@
 import React, { FormEvent, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import logoGithub from '../../assets/logo-github.svg';
 import { FiChevronRight } from 'react-icons/fi';
 import {Form, Repositories, Title, Error} from './styles'
+
 import api from '../../service/api';
-import { executionAsyncResource } from 'async_hooks';
 
 interface Repositories {
     full_name: string;
@@ -16,9 +16,8 @@ interface Repositories {
     description: string;
 }
 
-const Dashboard: React.FC = () => { 
+const Dashboard: React.FC = (props) => { 
 
-    
     const [ newRepo, setNewRepo ] = useState('');
     const [ inputError, setInputError ] = useState('');
     const [ repositories, setRepositories ] = useState<Repositories[]>(() => {
